@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-set -x
-
 #Rodar o PHPStan
 ./vendor/bin/phpstan
 if [ $? -ne 0 ]; then
@@ -15,7 +13,7 @@ STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1
 
 for FILE in $STAGED_FILES
 do
-    ./vendor/bin/pint "${FILE}"
+    ./vendor/bin/pint "${FILE}" > /dev/null >&1;
     git add "${FILE}"
     echo "git add '${FILE}'"
 done;
